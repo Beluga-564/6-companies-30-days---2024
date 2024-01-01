@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int minimizeSet(int divisor1, int divisor2, int uniqueCnt1, int uniqueCnt2) {
+        long long lcm = divisor1 * (long long)divisor2 / __gcd(divisor1, divisor2);
+        auto possible = [&] (long mid) -> bool {
+            long cnt1 = mid - mid / divisor1, cnt2 = mid - mid / divisor2, Union = mid - mid / lcm;
+            long common = max(0L, cnt1 + cnt2 - Union);
+            common -= max(0L, cnt1 - uniqueCnt1);
+            common -= max(0L, cnt2 - uniqueCnt2);
+            return common <= 0 and cnt1 >= uniqueCnt1 and cnt2 >= uniqueCnt2;
+        };
+        
+        long low = 1, high = 1e15;
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            if (possible (mid)) {
+                high = mid - 1;
+            }
+            else {
+                low = mid + 1;
+            }
+        }
+        return high + 1;
+    }
+};
