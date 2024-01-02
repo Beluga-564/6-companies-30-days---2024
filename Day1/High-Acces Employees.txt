@@ -1,0 +1,28 @@
+class Solution {
+public:
+    int time(string s) {
+        int a = stoi(s.substr(0, 2)) * 60;
+        return a + stoi(s.substr(2, 2));
+    }
+    
+    vector<string> findHighAccessEmployees(vector<vector<string>>& access_times) {
+        map<string, vector<int>> mp;
+        for (auto i : access_times) {
+            mp[i[0]].push_back(time(i[1]));
+        }
+        
+        vector<string> res;
+        for (auto i : mp) {
+            vector<int> tmp = i.second;
+            sort(tmp.begin(), tmp.end());
+            int sz = tmp.size();
+            for (int j = 0; j < sz - 2; j++) {
+                if (abs(tmp[j] - tmp[j + 2]) < 60) {
+                    res.push_back(i.first);
+                    break;
+                }
+            }
+        }
+        return res;
+    }
+};
