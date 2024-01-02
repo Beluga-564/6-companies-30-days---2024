@@ -1,0 +1,29 @@
+class Solution {
+public:
+    string mp[10] = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+    
+    void solve(int idx, int n, string& curr, string& digits, vector<string>& ds) {
+        if(idx == n) {
+            if(curr.size())
+                ds.push_back(curr);
+            return ;
+        }
+        
+        int digit = digits[idx] - '0';
+        for(int i = 0; i < mp[digit].size(); i++) {
+            curr += mp[digit][i];
+            solve(idx+1, n, curr, digits, ds);
+            curr.pop_back();
+        }
+    }
+    
+    vector<string> letterCombinations(string digits) {
+        int n = digits.size();
+        
+        vector<string> ds;
+        string curr = "";
+        solve(0, n, curr, digits, ds);
+        
+        return ds;
+    }
+};

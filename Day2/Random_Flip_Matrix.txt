@@ -1,0 +1,36 @@
+class Solution {
+public:
+    int m, n, row, col;
+    Solution(int m, int n) {
+        this -> m = m;
+        this -> n = n;
+        row = col = 0;
+    }
+    
+    vector<int> flip() {
+        if (col + 1 < n) {
+            col++;
+        }
+        else {
+            if (row + 1 < m) {
+                row++;
+            }
+            else {
+                row = 0;
+            }
+            col = 0;
+        }
+        return {row, col};
+    }
+    
+    void reset() {
+        
+    }
+};
+
+/**
+ * Your Solution object will be instantiated and called as such:
+ * Solution* obj = new Solution(m, n);
+ * vector<int> param_1 = obj->flip();
+ * obj->reset();
+ */
