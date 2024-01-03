@@ -23,3 +23,18 @@ public:
         return high + 1;
     }
 };
+
+
+pref[i] = pref[i - 1] + a[i]
+
+// cumulative sum
+if the query states find the sum from l to r
+arr = [a1, a2, a3, a4]
+ans = pref[r] - pref[l - 1]
+l = 1, r = 3
+a1 + a2 + a3 + a4 - a1 = a2 + a3 + a4
+
+// we are at a index r
+sub that ends with r = pref[r] - pref[l]
+subarr r = pref[r] - {pref[0], ... pref[r - k]}
+len = r - (r - k) = r - r + k = k

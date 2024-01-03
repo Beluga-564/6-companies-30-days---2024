@@ -1,0 +1,35 @@
+class Solution {
+public:
+    int delRow[4] = {-1, 0, +1, 0};
+    int delCol[4] = {0, +1, 0, -1};
+    
+    vector<vector<int>> highestPeak(vector<vector<int>>& isWater) {
+        int n = isWater.size(), m = isWater[0].size();
+        vector<vector<int>> res(n, vector<int> (m, -1));
+        
+        queue<array<int, 3>> q;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (isWater[i][j]) {
+                    q.push({0, i, j});
+                    res[i][j] = 0;
+                }
+            }
+        }
+        
+        while (q.size()) {
+            int val = q.front()[0], row = q.front()[1], col = q.front()[2];
+            q.pop();
+            if (res[row][col] > 0) continue;
+            res[row][col] = val;
+            for (int i = 0; i < 4; i++) {
+                int nrow = row + delRow[i];
+                int ncol = col + delCol[i];
+                if (nrow >= 0 and nrow < n and ncol >= 0 and ncol < m and res[nrow][ncol] < 0 and !isWater[nrow][ncol]) {
+                    q.push({val + 1, nrow, ncol});
+                }
+            }
+        }
+        return res;
+    }
+};

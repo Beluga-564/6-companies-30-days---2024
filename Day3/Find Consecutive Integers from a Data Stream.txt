@@ -1,0 +1,37 @@
+class DataStream
+{
+public:
+    deque<int> s;
+    int value;
+    int k;
+    int count;
+    DataStream(int value, int k)
+    {
+        this->value = value;
+        this->k = k;
+        count = 0;
+    }
+    bool consec(int num)
+    {
+        if (num == value)
+            count++;
+        if (s.size() < k)
+        {
+            s.push_back(num);
+        }
+        else
+        {
+            if (s.front() == value)
+            {
+                count--;
+                s.pop_front();
+            }
+            else
+            {
+                s.pop_front();
+            }
+            s.push_back(num);
+        }
+        return count == k;
+    }
+};

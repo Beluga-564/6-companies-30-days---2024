@@ -1,0 +1,24 @@
+class Solution{   
+public:
+    string printMinNumberForPattern(string S){
+        int n = S.size(), count = 2;
+        string res = "";
+        stack<char> st;
+        st.push('1');
+        for (int i = 0; i < n; i++) {
+            if (S[i] == 'I') {
+                while (st.size()) {
+                    res += st.top();
+                    st.pop();
+                }
+            }
+            st.push((char)(count + '0'));
+            count++;
+        }
+        while (st.size()) {
+            res += st.top();
+            st.pop();
+        }
+        return res;
+    }
+};
